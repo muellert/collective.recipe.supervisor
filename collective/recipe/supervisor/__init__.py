@@ -52,6 +52,10 @@ class Recipe(object):
         # Generate a [supervisord] section? collides with Debian's
         # configuration mechanism
         standalone = self.options.get('standalone', 'true')
+        if standalone[0] in "tTyYjJ":
+            standalone = True
+        else:
+            standalone = False
 
         def option_setting(options, key, supervisor_key):
             return options.get(key, False) \
